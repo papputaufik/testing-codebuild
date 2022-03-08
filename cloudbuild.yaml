@@ -1,6 +1,15 @@
 steps:
-- name: 'bash'
-  args: ['echo', 'Hello world!']
+    - id: 'IAC Process'
+      name: 'hashicorp/terraform:0.15.5'
+      entrypoint: 'sh'
+      args: 
+      - '-c'
+      - |
+        cd test-compute-cd # Go to the resource that need to be build 
+        terraform init 
+        terraform plan  
+        terraform apply --auto-approve
+timeout: 3600s
 logsBucket: 'gs://cloudbuild-test-prem'
 serviceAccount: 'projects/bamboo-weft-341407/serviceAccounts/test-hd@bamboo-weft-341407.iam.gserviceaccount.com'
 options:
