@@ -1,14 +1,13 @@
-resource "google_compute_instance" "test-vm-cd" {
-  name         = "test-vm-cd"
-  project	= "np-fi-corp-controller"
+resource "google_compute_instance" "test-vm-cd4"{
+  name         = "test-vm-cd1"
+  project	= "bamboo-weft-341407"
   provider     = google-beta
-  machine_type = "custom-4-8192"
+  machine_type = "e2-medium"  
   zone         = "us-central1-a"
   tags         = ["test-vm"]
 
   network_interface {
     network = "default"
-    subnetwork = "np-fi-corp-controller-us-central1"
     access_config {
       
     }
@@ -16,19 +15,16 @@ resource "google_compute_instance" "test-vm-cd" {
   }
   boot_disk {
     initialize_params {
-      image = "windows-server-2019-dc-v20200609"
-      type  = "pd-ssd"
-      size  = 75
+      image = "debian-cloud/debian-9"
     }
   }
   attached_disk {
     source = google_compute_disk.additional-disk.id
   }
- }
-
+}
 resource "google_compute_disk" "additional-disk" {
-  name = "test-disk"
-  project = "np-fi-corp-controller"
+  name = "test-disk14"
+  project = "bamboo-weft-341407"
   type = "pd-ssd"
   zone = "us-central1-a"
   size = 25
